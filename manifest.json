@@ -3,7 +3,6 @@
 
   "name": "Liferacing-fav",
   "description": "Позволяет добавить статью или кусок текста в избранное на сайте Liferacing.ru одним нажатием на кнопку",
-  "default_locale": "ru",
   "version": "1.0",
   "author": "Konstantin Kutsyllo, <trikadin@mail.ru>",
 
