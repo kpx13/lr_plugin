@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "Liferacing-fav",
+  "description": "Позволяет добавить статью или кусок текста в избранное на сайте Liferacing.ru одним нажатием на кнопку",
+  "default_locale": "ru",
+  "version": "1.0",
+  "author": "Konstantin Kutsyllo, <trikadin@mail.ru>",
+
+  "permissions": [
+    "activeTab",
+    "*://*.liferacing.ru/*"
+  ],
+
+  "icons": {
+    "16": "images/icon16.png",
+    "24": "images/icon24.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "96": "images/icon96.png",
+    "128": "images/icon128.png"
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Добавить в избранное на сайте Liferacing.ru"
+  },
+
+  "background": {
+    "scripts": ["js/addToFavorite"],
+    "persistent": false
+  }
+
+}
