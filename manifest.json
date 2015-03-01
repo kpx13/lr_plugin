@@ -29,6 +29,13 @@
     "default_title": "Добавить в избранное на сайте Liferacing.ru"
   },
 
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["js/getSelection.js"]
+    }
+  ],
+
   "background": {
     "scripts": ["js/addToFavorite.js"],
     "persistent": false
