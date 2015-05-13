@@ -1,0 +1,11 @@
+{
+  "name": "liferacing-plugin",
+  "version": "0.1.0",
+  "description": "Плагин для добавления статей в избранное сайта LifeRacing.ru",
+  "author": "trikadin@mail.ru",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0"
+  }
+}
