@@ -1,14 +1,12 @@
-function alertAllInfo(info) {
-    alert("Если бы я знал, куда, то мог бы отправить на сервер вот это:\n" + JSON.stringify(info, null, 4));
-}
-
-function iconClickListener(tab) {
-    var info= {
-        url: tab.url,
-        title: tab.title,
-        favurl: tab.favIconUrl
-    };
-    chrome.tabs.sendMessage(tab.id, info, alertAllInfo);
-}
-
-chrome.browserAction.onClicked.addListener(iconClickListener);
+chrome.browserAction.onClicked.addListener(
+    async (tab) => {
+        const url = `http://liferacing.ru/garage/add-link?link=${encodeURIComponent(tab.url)}`;
+        console.log('request url', url);
+        try {
+            const response = await fetch(url, {credentials: 'include'});
+            console.log(response.status, response.headers.get('Location'));
+        } catch (err) {
+            console.error('an error', err);
+        }
+    }
+);
