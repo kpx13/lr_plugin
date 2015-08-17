@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Liferacing-fav",
-  "description": "Позволяет добавить статью в избранное на сайте Liferacing.ru одним нажатием на кнопку",
+  "name": "Liferacing.ru",
+  "description": "Позволяет добавить страницу в гараж на сайте Liferacing.ru одним нажатием на кнопку",
   "version": "0.1.0",
   "author": "Konstantin Kutsyllo, <trikadin@mail.ru>",
 

@@ -1,11 +1,11 @@
 {
-  "name": "liferacing-plugin",
-  "version": "0.1.0",
+  "name": "Liferacing.ru",
+  "description": "Позволяет добавить страницу в гараж на сайте Liferacing.ru одним нажатием на кнопку",
   "homepage": "https://github.com/kpx13/lr_plugin",
+  "version": "0.1.0",
   "authors": [
     "Константин <trikadin@mail.ru>"
   ],
-  "description": "Позволяет добавить статью или кусок текста в избранное на сайте Liferacing.ru одним нажатием на кнопку",
   "moduleType": [
     "globals"
   ],

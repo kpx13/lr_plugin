@@ -1,7 +1,7 @@
 {
-  "name": "liferacing-plugin",
+  "name": "Liferacing.ru",
+  "description": "Позволяет добавить страницу в гараж на сайте Liferacing.ru одним нажатием на кнопку",
   "version": "0.1.0",
-  "description": "Плагин для добавления статей в избранное сайта LifeRacing.ru",
   "author": "trikadin@mail.ru",
   "license": "MIT",
   "devDependencies": {
