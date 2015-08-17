@@ -1,71 +1,85 @@
-var gulp = require('gulp'),
-    babel = require('gulp-babel'),
-    del = require('del');
+const
+  gulp = require('gulp'),
+  babel = require('gulp-babel'),
+  del = require('del'),
+  watch = require('gulp-watch'),
+  plumber = require('gulp-plumber');
 
-gulp.task('clean', function(next){
+gulp.task('clean',
+  function (next) {
     del(['./dist'], next);
-});
+  }
+);
 
-var WATCHERS = [];
+const TASKS = [];
 
-function createWatchTask(name, watchPath, defaultDepends, func) {
-    gulp.task(name, defaultDepends, func);
-    gulp.task(name + '-watch', func);
-    WATCHERS.push({
-        path: watchPath,
-        task: name + '-watch'
-    })
+function task(path, handlers) {
+  TASKS.push({
+    path: path,
+    handlers: handlers
+  });
 }
 
-createWatchTask('manifest', './manifest.json', ['clean'], function(next){
-    gulp.src('./manifest.json')
-        .pipe(gulp.dest('./dist'))
-        .on('end', next);
+task('manifest.json', [gulp.dest('./dist')]);
+
+task('static/**/*.*', [gulp.dest('./dist/static')]);
+
+task('src/**/*.js', [
+  babel({
+    blacklist: [
+      'regenerator',
+      'es6.blockScoping',
+      'es6.constants',
+      'es6.forOf',
+      'es6.templateLiterals'
+    ],
+    optional: ['asyncToGenerator'],
+    comments: false
+  }),
+  gulp.dest('./dist')
+]);
+
+gulp.task('default', ['clean'], function (cb) {
+  var counter = 0;
+
+  console.log('start');
+
+  function count() {
+    ++counter;
+    if (counter == TASKS.length) {
+      cb()
+    }
+  }
+
+  for (var i = 0; i < TASKS.length; i++) {
+    var task = TASKS[i];
+    var stream = gulp.src('./' + task.path);
+    console.log(task.path);
+
+    for (var j = 0; j < task.handlers.length; j++) {
+      console.log('before');
+      stream = stream.pipe(task.handlers[j]);
+      console.log('after');
+    }
+
+    stream.on('end', count);
+  }
 });
 
-createWatchTask('static', './static/**/*.*', ['clean'], function(next){
-    gulp.src('./static/**/*.*')
-        .pipe(gulp.dest('./dist/static'))
-        .on('end', next);
-});
+gulp.task(
+  'watch', ['clean'], function () {
+    for (var i = 0; i < TASKS.length; i++) {
+      var
+        task = TASKS[i];
 
-createWatchTask('build', './src/**/*.js', ['clean'], function buildTask(next) {
-    gulp.src('./src/**/*.js')
-        .pipe(
-            babel({
-                blacklist: ['regenerator'],
-                optional: ['asyncToGenerator'],
-                comments: false
-            })
-        )
-        .on(
-            'error',
-            function(e) {
-                console.error(e);
-                next();
-            }
-        )
-        .pipe(gulp.dest('./dist'))
-        .on('end', next);
-});
+      var stream = gulp
+        .src('./' + task.path)
+        .pipe(watch(task.path, {verbose: true}))
+        .pipe(plumber());
 
-gulp.task('default', ['clean', 'static', 'manifest', 'build']);
-
-function notifier(event) {
-    console.log(
-        'File',
-        event.path.replace(process.cwd() + '/', ''),
-        'was',
-        event.type + ', rebuild...'
-    );
-}
-
-gulp.task('watch', ['default'], function(){
-    WATCHERS.forEach(function (el) {
-        var watcher = gulp.watch(el.path, [el.task]);
-        watcher.on(
-            'change',
-            notifier
-        );
-    });
-});
+      for (var j = 0; j < task.handlers.length; j++) {
+        stream = stream.pipe(task.handlers[j]);
+      }
+    }
+  }
+);

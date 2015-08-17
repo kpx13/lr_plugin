@@ -2,12 +2,13 @@
   "manifest_version": 2,
 
   "name": "Liferacing-fav",
-  "description": "Позволяет добавить статью или кусок текста в избранное на сайте Liferacing.ru одним нажатием на кнопку",
+  "description": "Позволяет добавить статью в избранное на сайте Liferacing.ru одним нажатием на кнопку",
   "version": "0.1.0",
   "author": "Konstantin Kutsyllo, <trikadin@mail.ru>",
 
   "permissions": [
     "activeTab",
+    "cookies",
     "*://*.liferacing.ru/*"
   ],
 
@@ -32,12 +33,21 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["contents/getSelection.js"]
+      "css": [
+        "static/lib/toastr/toastr.min.css"
+      ],
+      "js": [
+        "static/lib/jquery/dist/jquery.min.js",
+        "static/lib/toastr/toastr.min.js",
+        "content.js"
+      ]
     }
   ],
 
   "background": {
-    "scripts": ["background/addToFavorite.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   }
 

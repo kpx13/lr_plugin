@@ -1,0 +1,26 @@
+{
+  "name": "liferacing-plugin",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kpx13/lr_plugin",
+  "authors": [
+    "Константин <trikadin@mail.ru>"
+  ],
+  "description": "Позволяет добавить статью или кусок текста в избранное на сайте Liferacing.ru одним нажатием на кнопку",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "liferacing"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "toastr": "~2.1.2"
+  }
+}
